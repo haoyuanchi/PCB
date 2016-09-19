@@ -42,8 +42,8 @@ img_template = FuncPreprocess(img_template);
 img_detect = FuncPreprocess(img_detect);
 % imshow(img_template);
 
-hight = min(size(img_template, 1), size(img_detect, 1));
-width = min(size(img_template, 2), size(img_detect, 2));
+hight = min()
+[hight, width] = min(size(img_template), size(img_detect));
 % img_detect = imresize(img_detect, [hight, width]);
 
 
@@ -63,20 +63,17 @@ for i = 1 : size(matching_points_detect, 3)
     %% image incision pixel
     if(i == 1)
         x_incision_start = 1;
-        x_incision_stop_template = matching_points_template(4,2,i) + overlap_pixel;        
-        x_incision_stop_detect = matching_points_detect(4,2,i) + overlap_pixel;        
+        x_incision_stop = matching_points_template(4,2,i) + overlap_pixel;        
     elseif(i == size(matching_points_detect, 3))
         x_incision_start = matching_points_template(4,2,i-1) - overlap_pixel;
-        x_incision_stop_template = size(img_template, 2);
-        x_incision_stop_detect = size(img_detect, 2);
+        x_incision_stop = size(img_detect,2);
     else
         x_incision_start = matching_points_template(1,2,i) - overlap_pixel;
-        x_incision_stop_template = matching_points_template(4,2,i) + overlap_pixel;        
-        x_incision_stop_detect = matching_points_detect(4,2,i) + overlap_pixel;        
+        x_incision_stop = matching_points_template(4,2,i) + overlap_pixel;
     end
     
-    img_incision_template = img_template(: , x_incision_start : x_incision_stop_template);
-    img_incision_detect = img_detect(: , x_incision_start : x_incision_stop_detect);
+    img_incision_template = img_template(: , x_incision_start : x_incision_stop);
+    img_incision_detect = img_detect(: , x_incision_start : x_incision_stop);
     match_points_template_temp = [matching_points_template(:,1,i), matching_points_template(:,2,i) - x_incision_start+1];
     match_points_detect_temp = [matching_points_detect(:,1,i), matching_points_detect(:,2,i) - x_incision_start+1];
     

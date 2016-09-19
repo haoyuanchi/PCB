@@ -2,6 +2,7 @@ function img_out = FuncPreprocess(img)
 
 img_gray =  im2bw(img, graythresh(img));
 
+
 [hight, width] = size(img_gray);
 
 left_index = 1;

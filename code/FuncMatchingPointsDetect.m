@@ -6,6 +6,13 @@ function matching_points = FuncMatchingPointsDetect(img, template_circle, is_deb
 % circles:  ͼ����ƥ��ģ��ĵ㼯
 
 %% initialize 
+
+up_start_pix = 1;
+down_stop_pix = size(img, 1);
+up_interval_pix = 1200;
+down_interval_pix = 1200;
+
+
 %  71
 % up_start_pix = 400;
 % down_stop_pix = 8200;
@@ -19,10 +26,10 @@ function matching_points = FuncMatchingPointsDetect(img, template_circle, is_deb
 % down_interval_pix = 1200;
 
 %  234
-up_start_pix = 2600;
-down_stop_pix = 13500;
-up_interval_pix = 1200;
-down_interval_pix = 1200;
+% up_start_pix = 2600;
+% down_stop_pix = 13500;
+% up_interval_pix = 1200;
+% down_interval_pix = 1200;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Detect the Matching Points
