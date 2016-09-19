@@ -9,8 +9,8 @@ function matching_points = FuncMatchingPointsDetect(img, template_circle, is_deb
 
 up_start_pix = 1;
 down_stop_pix = size(img, 1);
-up_interval_pix = 600;
-down_interval_pix = 600;
+up_interval_pix = 400;
+down_interval_pix = 400;
 
 
 %  71
