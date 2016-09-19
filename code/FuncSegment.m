@@ -1,9 +1,13 @@
-function [img_segment, img_inside] = FuncSegment(img,mark_points, img_type)
+function [img_segment, img_inside] = FuncSegment(img,mark_points, template_circle ,img_type)
 
-img_start_x = min(mark_points(:,2)) - 100;
-img_stop_x = max(mark_points(:,2)) + 100;    
-img_start_y = min(mark_points(:,1)) - 100;    
-img_stop_y = max(mark_points(:,1)) + 100;
+[m, n] = size(template_circle);
+% m = round(m / 2) + 1;
+n = round(n / 2) + 1;
+
+img_start_x = min(mark_points(:,2)) - n;
+img_stop_x = max(mark_points(:,2)) + n;    
+img_start_y = min(mark_points(:,1)) - m ;    
+img_stop_y = max(mark_points(:,1)) + m ;
 
 % print out the margin of marks
 mark_margin_up = (mark_points(5,2) - mark_points(1,2) + mark_points(6,2) - mark_points(2,2)) / 2;

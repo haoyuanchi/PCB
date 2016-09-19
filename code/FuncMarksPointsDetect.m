@@ -28,6 +28,14 @@ for i =  1: size(matching_points, 1)
     
     cicle_search = img_search(:,:,i);
     circle_para_xyr = FuncCicleDetect(cicle_search);   
+    
+    % sort the circle
+    temp = circle_para_xyr(:, 2);
+    [temp_sort, sort_index] = sort(temp);
+    circle_temp(1,:) = circle_para_xyr(sort_index(1), :);    
+    circle_temp(2,:) = circle_para_xyr(sort_index(2), :);    
+    
+    circle_para_xyr = circle_temp;
 
     % ��ȡ����Բ����� 
     circle_para_xyr(:,1) = circle_para_xyr(:,1) + y_up_left - 1;
