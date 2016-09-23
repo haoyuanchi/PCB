@@ -22,9 +22,9 @@ is_need_rotate = 1;
 % img_detect_name =  '44277/g.bmp';
 % img_template_circle_name = '../data/234/template_circle_234.bmp';
 
-image_base='/home/hychi/Project/PCB/data/test/Original/2016-07-12/'; 
+image_base='/home/hychi/Project/PCB/data/test/'; 
 img_template_name =  '13000/g.bmp';
-img_detect_name =  '13001/g.bmp';
+img_detect_name =  '13002/g.bmp';
 img_template_circle_name = '../data/59/template_circle_59.bmp';
 
 % save figure path
@@ -109,19 +109,19 @@ for i = 1 : size(matching_points_detect, 3)
     mark_points_img_detect = img_incision_detect(mark_points_detect(1,1) : mark_points_detect(3, 1), mark_points_detect(1,2) : mark_points_detect(6,2));
     [hight, width] = size(mark_points_img_template);
     mark_points_img_detect = imresize(mark_points_img_detect, [hight, width]);
-    img_temp1 = im2bw(mark_points_img_template, graythresh(mark_points_img_template));
-    img_temp3 = im2bw(mark_points_img_detect, graythresh(mark_points_img_detect));     
-    img_xor = xor(img_temp1, img_temp3);
+%     img_temp1 = im2bw(mark_points_img_template, graythresh(mark_points_img_template));
+%     img_temp3 = im2bw(mark_points_img_detect, graythresh(mark_points_img_detect));     
+%     img_xor = xor(img_temp1, img_temp3);
+%     
+%     if is_show_figure == 1
+%         fig_handle = figure(i+1);
+%         imshow(img_xor);
+%     end
+% 
+%     image_name = sprintf('%s%s%d.bmp',output_path,'xor_',i)
+%     imwrite(img_xor, image_name);
     
-    if is_show_figure == 1
-        fig_handle = figure(i+1);
-        imshow(img_xor);
-    end
-
-    image_name = sprintf('%s%s%d.bmp',output_path,'xor_',i)
-    imwrite(img_xor, image_name);
-    
-    %drawback_info = PCBDetect(img_incision_output, img_incision_template, 0, 1, 'log', 'output');
+    drawback_info = PCBDetect(mark_points_img_detect, mark_points_img_template, 0, 1, 'log', 'output');
 end
 
 
