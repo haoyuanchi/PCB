@@ -125,12 +125,12 @@ for drawback_idx=1:drawback_num
     drawback_box = ~(drawback_box_label-drawback_centroid_label);
 %     set(groot, 'CurrentFigure', drawback_show_handle);
     set(0, 'CurrentFigure', drawback_show_handle);
-    subplot(1,3,1);imshow(source_gary_box,[]);title('ÊäÈëÍ¼Ïñ¾Ö²¿');
-    subplot(1,3,2);imshow(template_gary_box,[]);title('Ä£°åÍ¼Ïñ¾Ö²¿');
+    subplot(1,3,1);imshow(source_gary_box,[]);title('ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ö²ï¿½');
+    subplot(1,3,2);imshow(template_gary_box,[]);title('Ä£ï¿½ï¿½Í¼ï¿½ï¿½Ö²ï¿½');
     subplot(1,3,3);imshow(drawback_box,[]);title(num2str(drawback_idx));
     % classifying
     drawback_class = DrawbackClassify(template_box,source_box,drawback_box,source_gary_box,template_gary_box,output_path,drawback_idx);
-    if ~strcmp(drawback_class, 'ÆäËû')
+    if ~strcmp(drawback_class, 'ï¿½ï¿½ï¿½ï¿½')
         drawback_num_output=drawback_num_output+1;
         drawback_info{drawback_num_output}.rect=drawback_box_index;
         drawback_info{drawback_num_output}.type=drawback_class;
@@ -169,15 +169,15 @@ if issave ==1
         rectangle('Position',drawback_info{drawback_idx}.rect,'EdgeColor','r');
         result_RGB = RectanglePlot(result_RGB,drawback_info{drawback_idx}.rect);
         set(groot,'CurrentFigure',drawback_fig_handle);
-        subplot(1,3,1);imshow(drawback_info{drawback_idx}.source,[]);title('ÊäÈëÍ¼Ïñ¾Ö²¿');
-        subplot(1,3,2);imshow(drawback_info{drawback_idx}.template,[]);title('Ä£°åÍ¼Ïñ¾Ö²¿');
-        subplot(1,3,3);imshow(drawback_info{drawback_idx}.drawback,[]);title('²»Í¬ÇøÓò');
-        title(['È±ÏÝ±àºÅ:',num2str(drawback_idx)]);
+        subplot(1,3,1);imshow(drawback_info{drawback_idx}.source,[]);title('ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ö²ï¿½');
+        subplot(1,3,2);imshow(drawback_info{drawback_idx}.template,[]);title('Ä£ï¿½ï¿½Í¼ï¿½ï¿½Ö²ï¿½');
+        subplot(1,3,3);imshow(drawback_info{drawback_idx}.drawback,[]);title('ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½');
+        title(['È±ï¿½Ý±ï¿½ï¿½:',num2str(drawback_idx)]);
 %         print(drawback_fig_handle,[output_path,'drawback',num2str(drawback_idx),'_',drawback_info{drawback_idx}.type],'-dbitmap');
 %         saveas(drawback_fig,[output_path,'drawback',num2str(drawback_idx),'_',drawback_info{drawback_idx}.type,'.bmp']);
-%         drawback_fig=getimage(drawback_fig_handle); % »ñÈ¡×ø±êÏµÖÐµÄÍ¼ÏñÎÄ¼þÊý¾Ý
+%         drawback_fig=getimage(drawback_fig_handle); % ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ïµï¿½Ðµï¿½Í¼ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½
 %         imwrite(drawback_fig,[output_path,'drawback',num2str(drawback_idx),'_',drawback_info{drawback_idx}.type,'.bmp']);
-        drawback_fig=frame2im(getframe(drawback_fig_handle)); % »ñÈ¡×ø±êÏµÖÐµÄÍ¼ÏñÎÄ¼þÊý¾Ý
+        drawback_fig=frame2im(getframe(drawback_fig_handle)); % ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ïµï¿½Ðµï¿½Í¼ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½
         imwrite(drawback_fig,[output_path,'drawback',num2str(drawback_idx),'_',drawback_info{drawback_idx}.type,'.bmp']);
     end
     imwrite(result_RGB,[output_path,'result','.bmp']);
@@ -194,9 +194,9 @@ if issave ==1
     fclose(log_file_p);
 end
 
-% result_fig=getimage(result_fig_handle); % »ñÈ¡×ø±êÏµÖÐµÄÍ¼ÏñÎÄ¼þÊý¾Ý
+% result_fig=getimage(result_fig_handle); % ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ïµï¿½Ðµï¿½Í¼ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½
 % imwrite(result_fig,[output_path,'result','.bmp']);
-% result_fig=frame2im(getframe(result_fig_handle)); % »ñÈ¡×ø±êÏµÖÐµÄÍ¼ÏñÎÄ¼þÊý¾Ý
+% result_fig=frame2im(getframe(result_fig_handle)); % ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ïµï¿½Ðµï¿½Í¼ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½
 % imwrite(result_fig,[output_path,'result','.bmp']);
 % print(result_fig_handle,[output_path,'result'],'-dbitmap');
 % saveas(h,[output_path,'result','.bmp']);

@@ -1,4 +1,6 @@
-function circles = FuncIncisionAndMarksPointDetect(img, matching_points, template_circle, is_debug, incision_index, img_type)
+function [mark_points, mark_points_img, interval_w, interval_h] = FuncIncisionAndMarksPointDetect(img, matching_points, template_circle, is_debug, incision_index, img_type)
+
+overlap_pixel = 300;
 if(incision_index == 1)
     x_incision_start = 1;
     x_incision_stop = matching_points(4, 2, incision_index) + overlap_pixel;           
@@ -8,16 +10,17 @@ elseif(incision_index == size(matching_points, 3))
 else
     x_incision_start = matching_points(1, 2, incision_index) - overlap_pixel;
     x_incision_stop = matching_points(4, 2, incision_index) + overlap_pixel;        
-end    
+end
+
 img_incision = img(: , x_incision_start : x_incision_stop);
-match_points_temp = [matching_points(:,1,incision_index), matching_points(:,2,incision_index) - x_incision_start + 1];
+match_points_temp = [matching_points(:, 1, incision_index), matching_points(:, 2, incision_index) - x_incision_start + 1];
 
-mark_points = FuncMarksPointsDetect(img, matching_points, template_circle, is_debug, incision_index, img_type);
+mark_points(:, :, incision_index) = FuncMarksPointsDetect(img_incision, match_points_temp, template_circle, is_debug, incision_index, img_type);
+mark_points_img(:, :, incision_index) = img_incision(mark_points(1,1, incision_index) : mark_points(3, 1, incision_index), mark_points(1, 2, incision_index) : mark_points(6, 2, incision_index));
 
-interval_w(1, 1) = mark_points(6, 2) - mark_points(1, 2);
-interval_w(2, 1) = mark_points(8, 2) - mark_points(3, 2);
-interval_h(1, 1) = mark_points(3, 1) - mark_points(1, 1);
-interval_h(2, 1) = mark_points(8, 1) - mark_points(6, 1);
+interval_w(:, incision_index) = ((mark_points(3, 1, incision_index) - mark_points(1,1, incision_index)) + (mark_points(6, 2, incision_index) - mark_points(6, 2, incision_index))) / 2;
+interval_h(:, incision_index) = ((mark_points(1, 2, incision_index) - mark_points(1,1, incision_index)) + (mark_points(6, 2, incision_index) - mark_points(6, 2, incision_index))) / 2;
+
     
     
     
@@ -74,6 +77,9 @@ for i =  1: size(matching_points, 1)
             plot(x,y,'r-');      
         end
         hold off;
+
+        image_name = sprintf('%s%s%d%s%d','circle_', img_type, incision_index,'__', i);
+        saveas(gcf, image_name, 'bmp');
     end
     
     circle_center = [circle_center; circle_para_xyr];    
@@ -81,6 +87,5 @@ end
 
 circles = circle_center(:,1:2);
 
-end
 
 
